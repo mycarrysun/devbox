@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+# Basic Utils
+alias c='clear'
+alias myip='echo $(curl icanhazip.com)'
+
+# Folders
+alias cdbox='cd $BOX_DIR'
+
+# Docker
+alias dc='docker-compose'
+alias dcd='dc down'
+alias dcu='dc up'
+alias dce='dc exec'
+alias dcb='dc build'
+
+# NPM Shortcuts
+alias nuke_modules='rm -rfv node_modules && rm -rfv $(find . -type d -name node_modules) && npm cache clean --force'
+alias nrb='npm run build'
+alias nrd='npm run dev'
+alias nrs='npm run start'
+alias ni='npm install'
+alias nv='npm version'
+alias nid='ni && nrd'
+alias nib='ni && nrb'
+
+# Yarn
+alias yi='yarn install'
+
+# Git
+alias sha='git rev-parse HEAD'
+alias gfp='git push --force'
+alias wip='$BOX_DIR/bin/git-wip'
+alias amend='$BOX_DIR/bin/git-amend-push'
+alias cm='$BOX_DIR/bin/git-commit'
+alias pushall='$BOX_DIR/bin/git-push-all-branches'
+
+# Terraform
+alias tfinit='terraform init -backend-config="key=${PWD##*/}"'
+alias tfplan='terraform plan -out=tfplan'
+alias tfip='tfinit && tfplan'
+alias tfapply='terraform apply tfplan'
+alias tffmt='find -name *.tf -exec terraform fmt {} \;'

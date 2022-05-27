@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+BRANCHES=$(git branch | grep mh- | sed -e 's/*//g' -e 's/ //g')
+MERGED_BRANCHES=$(git branch --merged origin/main)
+MERGED_RELEASE_BRANCHES=$(git branch --merged origin/release)
+
+for BRANCH in $BRANCHES
+do
+  if [[ "$MERGED_BRANCHES" == *"$BRANCH"* && "$BRANCH" != "mh-dev" ]]
+  then
+    echo "deleting $BRANCH"
+    git branch -d "$BRANCH"
+  elif [[ "$MERGED_RELEASE_BRANCHES" == *"$BRANCH"* ]]
+  then
+    echo "deleting $BRANCH"
+    git branch -d "$BRANCH"
+  fi
+done

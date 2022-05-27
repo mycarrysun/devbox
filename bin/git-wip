@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ -z $(git status -s) ]]
+then
+  echo "Nothing to commit"
+  exit 0
+fi
+git add .
+LAST_COMMIT=$(git log --pretty=format:%s -1)
+if [[ $LAST_COMMIT == "wip" ]]
+then
+  git commit --amend --no-edit
+else
+  git commit -m "wip"
+fi
+git push --force-with-lease

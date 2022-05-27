@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+aws ssm get-parameter --name "$1" --with-decryption --query 'Parameter.Value' --output text

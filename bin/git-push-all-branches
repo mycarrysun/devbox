@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+bash $BOX_DIR/bin/git-delete-merged-branches
+
+BRANCHES=$(git branch | grep mh- | sed -e 's/*//g' -e 's/ //g')
+MERGED_BRANCHES=$(git branch --merged origin/main)
+
+for BRANCH in $BRANCHES
+do
+  if [[ "$MERGED_BRANCHES" == *"$BRANCH"* ]]
+  then
+    echo "$BRANCH should have been deleted"
+  else
+    git push --force origin "$BRANCH"
+  fi
+done

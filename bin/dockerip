@@ -1,0 +1,8 @@
+#!/bin/bash
+set -euo pipefail
+
+name=$1
+containerid=$(docker ps -aqf "name=$name")
+ip=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $containerid)
+sudo sed -i "/$name/d" /etc/hosts
+echo "$ip $name" | sudo tee -a /etc/hosts

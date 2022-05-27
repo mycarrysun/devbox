@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+# folders
+alias cdp='cd ~/code/platform/src'
+alias cdb='cd ~/code/backend'
+alias cdinf='cd ~/code/infrastructure'
+alias cdf='cd ~/code/frontend'
+alias cdlightspeed='cd ~/code/frontend/applications/Lightspeed'
+alias cdrqw='cd ~/code/platform/src/Clients/Widgets/RateQuery'
+
+# docker
+alias dclead='dc --profile lead-api -f docker-compose.yml -f docker-compose.override.yml up'
