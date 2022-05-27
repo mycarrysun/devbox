@@ -41,3 +41,28 @@ java --version > /dev/null 2>&1 || {
 terraform --version > /dev/null 2>&1 || {
   brew install terraform
 }
+
+mkdir -p ~/code
+cd ~/code
+
+if [[ ! -d ./frontend ]]
+then
+  git clone git@github.com:lower-financial/frontend.git
+fi
+
+if [[ ! -d ./backend ]]
+then
+  git clone git@github.com:lower-financial/backend.git
+fi
+
+if [[ ! -d ./platform ]]
+then
+  git clone git@github.com:lower-financial/platform.git
+fi
+
+if [[ ! -d ./infrastructure ]]
+then
+  git clone git@github.com:lower-financial/infrastructure.git
+fi
+
+cd -
