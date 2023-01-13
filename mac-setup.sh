@@ -42,6 +42,16 @@ terraform --version > /dev/null 2>&1 || {
   brew install terraform
 }
 
+bun --version > /dev/null 2>&1 || {
+  curl https://bun.sh/install | bash
+}
+
+docker-credential-helper-ecr > /dev/null 2>&1 || {
+  brew install docker-credential-helper-ecr
+  DOCKER_HELPER_PATH=$(echo -n "$(brew --prefix docker-credential-helper-ecr)")
+  echo "export PATH=\"\$PATH:$DOCKER_HELPER_PATH\"" >> ~/.zprofile
+}
+
 mkdir -p ~/code
 cd ~/code
 

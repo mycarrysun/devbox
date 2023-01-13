@@ -5,15 +5,22 @@ BRANCHES=$(git branch | grep mh- | sed -e 's/*//g' -e 's/ //g')
 MERGED_BRANCHES=$(git branch --merged origin/main)
 MERGED_RELEASE_BRANCHES=$(git branch --merged origin/release)
 
+delete_branch () {
+  git branch -d "$1"
+  set +e pipefail
+  git push origin --delete "$1"
+  set -e pipefail
+}
+
 for BRANCH in $BRANCHES
 do
-  if [[ "$MERGED_BRANCHES" == *"$BRANCH"* && "$BRANCH" != "mh-dev" ]]
+  if [[ "$MERGED_BRANCHES" == *"$BRANCH"* && "$BRANCH" != "mh-dev" && "$BRANCH" != "main" ]]
   then
     echo "deleting $BRANCH"
-    git branch -d "$BRANCH"
+    delete_branch "$BRANCH"
   elif [[ "$MERGED_RELEASE_BRANCHES" == *"$BRANCH"* ]]
   then
     echo "deleting $BRANCH"
-    git branch -d "$BRANCH"
+    delete_branch "$BRANCH"
   fi
 done
