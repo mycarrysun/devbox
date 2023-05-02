@@ -39,7 +39,7 @@ java --version > /dev/null 2>&1 || {
 }
 
 terraform --version > /dev/null 2>&1 || {
-  brew install terraform
+  brew install tfenv
 }
 
 bun --version > /dev/null 2>&1 || {
